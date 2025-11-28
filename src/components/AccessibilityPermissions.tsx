@@ -3,6 +3,7 @@ import {
   checkAccessibilityPermission,
   requestAccessibilityPermission,
 } from "tauri-plugin-macos-permissions-api";
+import { useI18n } from "../lib/i18n";
 
 // Define permission state type
 type PermissionState = "request" | "verify" | "granted";
@@ -15,8 +16,8 @@ interface ButtonConfig {
 
 const AccessibilityPermissions: React.FC = () => {
   const [hasAccessibility, setHasAccessibility] = useState<boolean>(false);
-  const [permissionState, setPermissionState] =
-    useState<PermissionState>("request");
+  const [permissionState, setPermissionState] = useState<PermissionState>("request");
+  const { t } = useI18n();
 
   // Check permissions without requesting
   const checkPermissions = async (): Promise<boolean> => {
@@ -61,12 +62,12 @@ const AccessibilityPermissions: React.FC = () => {
   // Configure button text and style based on state
   const buttonConfig: Record<PermissionState, ButtonConfig | null> = {
     request: {
-      text: "Grant",
+      text: t("grant"),
       className:
         "px-2 py-1 text-sm font-semibold bg-mid-gray/10 border  border-mid-gray/80 hover:bg-logo-primary/10 rounded cursor-pointer hover:border-logo-primary",
     },
     verify: {
-      text: "Verify",
+      text: "验证",
       className:
         "bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded text-sm flex items-center justify-center cursor-pointer",
     },
@@ -80,7 +81,7 @@ const AccessibilityPermissions: React.FC = () => {
       <div className="flex justify-between items-center gap-2">
         <div className="">
           <p className="text-sm font-medium">
-            Please grant accessibility permissions for Handy
+            {t("please_grant_accessibility")}
           </p>
         </div>
         <button

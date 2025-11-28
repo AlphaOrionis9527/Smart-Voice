@@ -8,11 +8,13 @@ import { StartHidden } from "../StartHidden";
 import { AutostartToggle } from "../AutostartToggle";
 import { PasteMethodSetting } from "../PasteMethod";
 import { ClipboardHandlingSetting } from "../ClipboardHandling";
+import { useI18n } from "../../../lib/i18n";
 
 export const AdvancedSettings: React.FC = () => {
+  const { t } = useI18n();
   return (
     <div className="max-w-3xl w-full mx-auto space-y-6">
-      <SettingsGroup title="Advanced">
+      <SettingsGroup title={t("advanced")}>
         <StartHidden descriptionMode="tooltip" grouped={true} />
         <AutostartToggle descriptionMode="tooltip" grouped={true} />
         <ShowOverlay descriptionMode="tooltip" grouped={true} />

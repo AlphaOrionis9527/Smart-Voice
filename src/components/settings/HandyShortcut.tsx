@@ -11,6 +11,7 @@ import { SettingContainer } from "../ui/SettingContainer";
 import { useSettings } from "../../hooks/useSettings";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
+import { useI18n } from "../../lib/i18n";
 
 interface HandyShortcutProps {
   descriptionMode?: "inline" | "tooltip";
@@ -23,6 +24,7 @@ export const HandyShortcut: React.FC<HandyShortcutProps> = ({
 }) => {
   const { getSetting, updateBinding, resetBinding, isUpdating, isLoading } =
     useSettings();
+  const { t } = useI18n();
   const [keyPressed, setKeyPressed] = useState<string[]>([]);
   const [recordedKeys, setRecordedKeys] = useState<string[]>([]);
   const [editingShortcutId, setEditingShortcutId] = useState<string | null>(
@@ -243,12 +245,12 @@ export const HandyShortcut: React.FC<HandyShortcutProps> = ({
   if (isLoading) {
     return (
       <SettingContainer
-        title="Handy Shortcuts"
-        description="Configure keyboard shortcuts to trigger speech-to-text recording"
+        title={t("handy_shortcut")}
+        description="配置键盘快捷键来触发语音转文本录制"
         descriptionMode={descriptionMode}
         grouped={grouped}
       >
-        <div className="text-sm text-mid-gray">Loading shortcuts...</div>
+        <div className="text-sm text-mid-gray">加载快捷键中...</div>
       </SettingContainer>
     );
   }
@@ -257,20 +259,20 @@ export const HandyShortcut: React.FC<HandyShortcutProps> = ({
   if (Object.keys(bindings).length === 0) {
     return (
       <SettingContainer
-        title="Handy Shortcuts"
-        description="Configure keyboard shortcuts to trigger speech-to-text recording"
+        title={t("handy_shortcut")}
+        description="配置键盘快捷键来触发语音转文本录制"
         descriptionMode={descriptionMode}
         grouped={grouped}
       >
-        <div className="text-sm text-mid-gray">No shortcuts configured</div>
+        <div className="text-sm text-mid-gray">未配置快捷键</div>
       </SettingContainer>
     );
   }
 
   return (
     <SettingContainer
-      title="Handy Shortcut"
-      description="Set the keyboard shortcut to start and stop speech-to-text recording"
+      title={t("handy_shortcut")}
+      description="设置开始和停止语音转文本录制的键盘快捷键"
       descriptionMode={descriptionMode}
       grouped={grouped}
       tooltipPosition="bottom"

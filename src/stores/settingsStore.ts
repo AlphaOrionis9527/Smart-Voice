@@ -70,6 +70,7 @@ const DEFAULT_SETTINGS: Partial<Settings> = {
   selected_output_device: "Default",
   translate_to_english: false,
   selected_language: "auto",
+  ui_language: "en",
   overlay_position: "bottom",
   debug_mode: false,
   log_level: 2,

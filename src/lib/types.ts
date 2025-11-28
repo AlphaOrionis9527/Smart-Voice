@@ -97,6 +97,7 @@ export const SettingsSchema = z.object({
   selected_output_device: z.string().nullable().optional(),
   translate_to_english: z.boolean(),
   selected_language: z.string(),
+  ui_language: z.enum(["en", "zh-CN"]).optional().default("en"),
   overlay_position: OverlayPositionSchema,
   debug_mode: z.boolean(),
   log_level: LogLevelSchema.optional().default(2),

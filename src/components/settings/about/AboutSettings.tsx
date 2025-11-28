@@ -5,9 +5,11 @@ import { SettingsGroup } from "../../ui/SettingsGroup";
 import { SettingContainer } from "../../ui/SettingContainer";
 import { Button } from "../../ui/Button";
 import { AppDataDirectory } from "../AppDataDirectory";
+import { useI18n } from "../../../lib/i18n";
 
 export const AboutSettings: React.FC = () => {
   const [version, setVersion] = useState("");
+  const { t } = useI18n();
 
   useEffect(() => {
     const fetchVersion = async () => {
@@ -32,56 +34,56 @@ export const AboutSettings: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl w-full mx-auto space-y-6">
-      <SettingsGroup title="About">
-        <SettingContainer
-          title="Version"
-          description="Current version of Handy"
-          grouped={true}
-        >
-          <span className="text-sm font-mono">v{version}</span>
-        </SettingContainer>
-
-        <AppDataDirectory descriptionMode="tooltip" grouped={true} />
-
-        <SettingContainer
-          title="Source Code"
-          description="View source code and contribute"
-          grouped={true}
-        >
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={() => openUrl("https://github.com/cjpais/Handy")}
+      <div className="max-w-3xl w-full mx-auto space-y-6">
+        <SettingsGroup title={t("about")}>
+          <SettingContainer
+            title="版本"
+            description="Handy 当前版本"
+            grouped={true}
           >
-            View on GitHub
-          </Button>
-        </SettingContainer>
+            <span className="text-sm font-mono">v{version}</span>
+          </SettingContainer>
 
-        <SettingContainer
-          title="Support Development"
-          description="Help us continue building Handy"
-          grouped={true}
-        >
-          <Button variant="primary" size="md" onClick={handleDonateClick}>
-            Donate
-          </Button>
-        </SettingContainer>
-      </SettingsGroup>
+          <AppDataDirectory descriptionMode="tooltip" grouped={true} />
 
-      <SettingsGroup title="Acknowledgments">
-        <SettingContainer
-          title="Whisper.cpp"
-          description="High-performance inference of OpenAI's Whisper automatic speech recognition model"
-          grouped={true}
-          layout="stacked"
-        >
-          <div className="text-sm text-mid-gray">
-            Handy uses Whisper.cpp for fast, local speech-to-text processing.
-            Thanks to the amazing work by Georgi Gerganov and contributors.
-          </div>
-        </SettingContainer>
-      </SettingsGroup>
-    </div>
-  );
+          <SettingContainer
+            title="源代码"
+            description="查看源代码并贡献"
+            grouped={true}
+          >
+            <Button
+              variant="secondary"
+              size="md"
+              onClick={() => openUrl("https://github.com/cjpais/Handy")}
+            >
+              在 GitHub 上查看
+            </Button>
+          </SettingContainer>
+
+          <SettingContainer
+            title="支持开发"
+            description="帮助我们继续开发 Handy"
+            grouped={true}
+          >
+            <Button variant="primary" size="md" onClick={handleDonateClick}>
+              捐赠
+            </Button>
+          </SettingContainer>
+        </SettingsGroup>
+
+        <SettingsGroup title="致谢">
+          <SettingContainer
+            title="Whisper.cpp"
+            description="OpenAI Whisper 自动语音识别模型的高性能推理实现"
+            grouped={true}
+            layout="stacked"
+          >
+            <div className="text-sm text-mid-gray">
+              Handy 使用 Whisper.cpp 进行快速的本地语音转文本处理。
+              感谢 Georgi Gerganov 和贡献者的出色工作。
+            </div>
+          </SettingContainer>
+        </SettingsGroup>
+      </div>
+    );
 };

@@ -3,6 +3,7 @@ import { Dropdown } from "../ui/Dropdown";
 import { SettingContainer } from "../ui/SettingContainer";
 import { ResetButton } from "../ui/ResetButton";
 import { useSettings } from "../../hooks/useSettings";
+import { useI18n } from "../../lib/i18n";
 
 interface MicrophoneSelectorProps {
   descriptionMode?: "inline" | "tooltip";
@@ -20,6 +21,7 @@ export const MicrophoneSelector: React.FC<MicrophoneSelectorProps> = React.memo(
       audioDevices,
       refreshAudioDevices,
     } = useSettings();
+    const { t } = useI18n();
 
     const selectedMicrophone =
       getSetting("selected_microphone") === "default"
@@ -41,8 +43,8 @@ export const MicrophoneSelector: React.FC<MicrophoneSelectorProps> = React.memo(
 
     return (
       <SettingContainer
-        title="Microphone"
-        description="Select your preferred microphone device"
+        title={t("microphone")}
+        description="选择您偏好的麦克风设备"
         descriptionMode={descriptionMode}
         grouped={grouped}
       >

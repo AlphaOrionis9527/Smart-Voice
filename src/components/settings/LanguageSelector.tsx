@@ -5,6 +5,7 @@ import { ResetButton } from "../ui/ResetButton";
 import { useSettings } from "../../hooks/useSettings";
 import { useModels } from "../../hooks/useModels";
 import { LANGUAGES } from "../../lib/constants/languages";
+import { useI18n } from "../../lib/i18n";
 
 interface LanguageSelectorProps {
   descriptionMode?: "inline" | "tooltip";
@@ -18,6 +19,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   grouped = false,
 }) => {
   const { getSetting, updateSetting, resetSetting, isUpdating } = useSettings();
+  const { t } = useI18n();
   const { currentModel, loadCurrentModel } = useModels();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -105,11 +107,11 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 
   return (
     <SettingContainer
-      title="Language"
+      title={t("language")}
       description={
         isUnsupported
-          ? "Parakeet model automatically detects the language. No manual selection is needed."
-          : "Select the language for speech recognition. Auto will automatically determine the language, while selecting a specific language can improve accuracy for that language."
+          ? "Parakeet 模型会自动检测语言，无需手动选择。"
+          : "选择语音识别的语言。自动模式会自动确定语言，而选择特定语言可以提高该语言的准确性。"
       }
       descriptionMode={descriptionMode}
       grouped={grouped}

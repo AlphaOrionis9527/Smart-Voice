@@ -4,6 +4,7 @@ import { SettingContainer } from "../ui/SettingContainer";
 import { ResetButton } from "../ui/ResetButton";
 import { useSettings } from "../../hooks/useSettings";
 import { AudioDevice } from "../../lib/types";
+import { useI18n } from "../../lib/i18n";
 
 interface OutputDeviceSelectorProps {
   descriptionMode?: "inline" | "tooltip";
@@ -23,6 +24,7 @@ export const OutputDeviceSelector: React.FC<OutputDeviceSelectorProps> =
         outputDevices,
         refreshOutputDevices,
       } = useSettings();
+      const { t } = useI18n();
 
       const selectedOutputDevice =
         getSetting("selected_output_device") === "default"
@@ -44,8 +46,8 @@ export const OutputDeviceSelector: React.FC<OutputDeviceSelectorProps> =
 
       return (
         <SettingContainer
-          title="Output Device"
-          description="Select your preferred audio output device for feedback sounds"
+          title={t("output_device")}
+          description="选择用于反馈声音的音频输出设备"
           descriptionMode={descriptionMode}
           grouped={grouped}
           disabled={disabled}

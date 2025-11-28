@@ -3,6 +3,7 @@ import { Cog, FlaskConical, History, Info, Sparkles } from "lucide-react";
 import HandyTextLogo from "./icons/HandyTextLogo";
 import HandyHand from "./icons/HandyHand";
 import { useSettings } from "../hooks/useSettings";
+import { useI18n } from "../lib/i18n";
 import {
   GeneralSettings,
   AdvancedSettings,
@@ -78,6 +79,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSectionChange,
 }) => {
   const { settings } = useSettings();
+  const { t } = useI18n();
 
   const availableSections = Object.entries(SECTIONS_CONFIG)
     .filter(([_, config]) => config.enabled(settings))
@@ -102,7 +104,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => onSectionChange(section.id)}
             >
               <Icon width={24} height={24} />
-              <p className="text-sm font-medium">{section.label}</p>
+              <p className="text-sm font-medium">{t(section.id)}</p>
             </div>
           );
         })}

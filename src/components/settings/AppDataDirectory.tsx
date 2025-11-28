@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { SettingContainer } from "../ui/SettingContainer";
 import { Button } from "../ui/Button";
+import { useI18n } from "../../lib/i18n";
 
 interface AppDataDirectoryProps {
   descriptionMode?: "tooltip" | "inline";
@@ -12,6 +13,7 @@ export const AppDataDirectory: React.FC<AppDataDirectoryProps> = ({
   descriptionMode = "inline",
   grouped = false,
 }) => {
+  const { t } = useI18n();
   const [appDirPath, setAppDirPath] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -62,27 +64,27 @@ export const AppDataDirectory: React.FC<AppDataDirectoryProps> = ({
   }
 
   return (
-    <SettingContainer
-      title="App Data Directory"
-      description="Main directory where application data, settings, and models are stored"
-      descriptionMode={descriptionMode}
-      grouped={grouped}
-      layout="stacked"
-    >
-      <div className="flex items-center gap-2">
-        <div className="flex-1 min-w-0 px-2 py-2 bg-mid-gray/10 border border-mid-gray/80 rounded text-xs font-mono break-all">
-          {appDirPath}
+      <SettingContainer
+        title="应用数据目录"
+        description="存储应用数据、设置和模型的主目录"
+        descriptionMode={descriptionMode}
+        grouped={grouped}
+        layout="stacked"
+      >
+        <div className="flex items-center gap-2">
+          <div className="flex-1 min-w-0 px-2 py-2 bg-mid-gray/10 border border-mid-gray/80 rounded text-xs font-mono break-all">
+            {appDirPath}
+          </div>
+          <Button
+            onClick={handleOpen}
+            variant="secondary"
+            size="sm"
+            disabled={!appDirPath}
+            className="px-3 py-2"
+          >
+            打开
+          </Button>
         </div>
-        <Button
-          onClick={handleOpen}
-          variant="secondary"
-          size="sm"
-          disabled={!appDirPath}
-          className="px-3 py-2"
-        >
-          Open
-        </Button>
-      </div>
-    </SettingContainer>
-  );
+      </SettingContainer>
+    );
 };

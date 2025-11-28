@@ -7,6 +7,7 @@ import Footer from "./components/footer";
 import Onboarding from "./components/onboarding";
 import { Sidebar, SidebarSection, SECTIONS_CONFIG } from "./components/Sidebar";
 import { useSettings } from "./hooks/useSettings";
+import { useUILanguage } from "./lib/i18n";
 
 const renderSettingsContent = (section: SidebarSection) => {
   const ActiveComponent =
@@ -16,9 +17,11 @@ const renderSettingsContent = (section: SidebarSection) => {
 
 function App() {
   const [showOnboarding, setShowOnboarding] = useState<boolean | null>(null);
-  const [currentSection, setCurrentSection] =
+  const [currentSection, setCurrentSection] = 
     useState<SidebarSection>("general");
   const { settings, updateSetting } = useSettings();
+  // Initialize and sync UI language
+  useUILanguage();
 
   useEffect(() => {
     checkOnboardingStatus();
